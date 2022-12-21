@@ -1,0 +1,7 @@
+.app {
+  max-width: 1080px;
+  margin: 50px auto 0;
+  background: #fff;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.04);
+  border-radius: 20px;
+}
