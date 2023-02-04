@@ -7,7 +7,7 @@ const Cart = () => {
 
   return (
     <div
-      onClick={() => setVisible(!visible)}
+      onClick={() => setVisible(false)}
       className={visible ? `${styles.overlay} ${styles.visible}` : styles.overlay}
     >
       <div className={styles.drawer} onClick={(e) => e.stopPropagation()}>
