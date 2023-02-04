@@ -1,0 +1,30 @@
+.overlay {
+  z-index: 1;
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.drawer {
+  width: 380px;
+  height: 100vh;
+  background: white;
+  position: absolute;
+  right: 0;
+  padding: 30px;
+  transition: right ease-in-out 1s;
+  box-shadow: -10px 4px 24px rgba(0, 0, 0, 0.5);
+}
+
+.visible {
+  display: block;
+}
+
+.cartHeader {
+  margin-bottom: 30px;
+}
+

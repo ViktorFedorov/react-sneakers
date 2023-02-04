@@ -1,0 +1,47 @@
+.cartItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 20px;
+  width: 100%;
+  border: 1px solid #F3F3F3;
+  border-radius: 20px;
+  margin-bottom: 20px;
+}
+
+.cartImage {
+  width: 70px;
+  height: 70px;
+  display: block;
+}
+
+.cartContent {
+  width: 150px;
+}
+
+.cartTitle {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 17px;
+  margin-bottom: 8px;
+}
+
+.cartPrice {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 17px;
+}
+
+.cartRemove {
+  width: 32px;
+  height: 32px;
+  border: 1px solid #DBDBDB;
+  border-radius: 8px;
+  background: url(../../images/remove-btn.svg) no-repeat center center transparent;
+  cursor: pointer;
+  transition: all ease-in-out 0.2s;
+}
+
+.cartRemove:hover {
+  transform: rotate(90deg);
+}
