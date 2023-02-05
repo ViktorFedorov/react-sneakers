@@ -43,5 +43,6 @@
 }
 
 .cartRemove:hover {
-  transform: rotate(90deg);
+  transform: scale(120%, 120%);
+  border: 1px solid lightcoral;
 }

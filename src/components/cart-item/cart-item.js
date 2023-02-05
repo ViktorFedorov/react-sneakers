@@ -14,7 +14,7 @@ const CartItem = () => {
           12 999 руб.
         </p>
       </div>
-      <button className={styles.cartRemove}></button>
+      <button className={styles.cartRemove} title='удалить товар'></button>
     </div>
   )
 }
