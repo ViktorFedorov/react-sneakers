@@ -16,8 +16,22 @@
   height: 100%;
 }
 
+.goodsInCart {
+  overflow-y: scroll;
+  padding-right: 10px;
+}
+
+.goodsInCart::-webkit-scrollbar {
+  width: 5px;               /* ширина scrollbar */
+}
+
+.goodsInCart::-webkit-scrollbar-thumb {
+  background-color: #9DD458;    /* цвет плашки */
+  border-radius: 20px;       /* закругления плашки */
+}
+
 .drawer {
-  width: 380px;
+  width: 390px;
   height: 100vh;
   background: white;
   position: absolute;

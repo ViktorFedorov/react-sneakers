@@ -13,8 +13,11 @@ const Cart = () => {
     >
       <div className={styles.drawer} onClick={(e) => e.stopPropagation()}>
         <div className={styles.wrapper}>
-          <div>
+          <div className={styles.goodsInCart}>
             <h2 className={styles.cartHeader}>Корзина</h2>
+            <CartItem />
+            <CartItem />
+            <CartItem />
             <CartItem />
             <CartItem />
           </div>
