@@ -3,14 +3,30 @@
 }
 
 .cartSum {
-
+ display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  align-items: baseline;
 }
 
-.cartTax {
+.mediumText {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19px;
+}
 
+.boldText {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.dashed {
+  width: 50%;
+  border-bottom: 1px dashed #DFDFDF;
 }
 
 .createOrderButton {
+  margin-top: 5px;
   color: #fff;
   border: none;
   border-radius: 18px;

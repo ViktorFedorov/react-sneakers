@@ -5,12 +5,14 @@ const CartFooter = () => {
   return (
     <div className={styles.cartFooter}>
       <div className={styles.cartSum}>
-        <span>Итого:</span>
-        <span>21498 руб.</span>
+        <span className={styles.mediumText}>Итого:</span>
+        <span className={styles.dashed}></span>
+        <span className={styles.boldText}>21498 руб.</span>
       </div>
-      <div className={styles.cartTax}>
-        <span>Налог 5%:</span>
-        <span>1074 руб.</span>
+      <div className={styles.cartSum}>
+        <span className={styles.mediumText}>Налог 5%:</span>
+        <span className={styles.dashed}></span>
+        <span className={styles.boldText}>1074 руб.</span>
       </div>
       <button className={styles.createOrderButton}>
         Оформить заказ
