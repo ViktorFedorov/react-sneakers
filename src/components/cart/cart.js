@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import styles from './cart.module.css'
 import CartItem from '../cart-item/cart-item'
+import CartFooter from '../cart-footer/cart-footer'
 
 const Cart = () => {
   const [visible, setVisible] = useState(true)
@@ -11,9 +12,14 @@ const Cart = () => {
       className={visible ? `${styles.overlay} ${styles.visible}` : styles.overlay}
     >
       <div className={styles.drawer} onClick={(e) => e.stopPropagation()}>
-        <h2 className={styles.cartHeader}>Корзина</h2>
-        <CartItem />
-        <CartItem />
+        <div className={styles.wrapper}>
+          <div>
+            <h2 className={styles.cartHeader}>Корзина</h2>
+            <CartItem />
+            <CartItem />
+          </div>
+          <CartFooter />
+        </div>
       </div>
     </div>
   )
