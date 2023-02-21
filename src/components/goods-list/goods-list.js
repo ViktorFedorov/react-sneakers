@@ -1,6 +1,7 @@
 import React from 'react'
-import styles from './goods-list.module.css'
 import GoodsItem from '../goods-item/goods-item'
+import sneakers from '../../services/test-data'
+import styles from './goods-list.module.css'
 
 const GoodsList = () => {
   return (
@@ -13,16 +14,17 @@ const GoodsList = () => {
           type="text"/>
       </div>
       <ul className={styles.goodsList}>
-        <GoodsItem />
-        <GoodsItem />
-        <GoodsItem />
-        <GoodsItem />
-        <GoodsItem />
-        <GoodsItem />
-        <GoodsItem />
-        <GoodsItem />
+        {
+          sneakers.map(({title, image, price}) => {
+            return <GoodsItem
+              key={title}
+              title={title}
+              image={image}
+              price={price}
+            />
+          })
+        }
       </ul>
-
     </div>
   )
 }

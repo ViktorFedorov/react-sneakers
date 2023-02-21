@@ -4,7 +4,7 @@ import CartItem from '../cart-item/cart-item'
 import CartFooter from '../cart-footer/cart-footer'
 
 const Cart = () => {
-  const [visible, setVisible] = useState(true)
+  const [visible, setVisible] = useState(false)
 
   return (
     <div
