@@ -1,10 +1,15 @@
-import React from 'react'
+import React, {useState} from 'react'
 import styles from './goods-item.module.css'
 
 const GoodsItem = ({title, image, price}) => {
+  const [active, setActive] = useState(false)
+  const [like, setLike] = useState(false)
+
   return (
     <li className={styles.goodsItem}>
-      <button className={styles.addToFavorite}></button>
+      <button
+        onClick={() => setLike(!like)}
+        className={like ? `${styles.addToFavorite} ${styles.liked}` : styles.addToFavorite}></button>
       <img className={styles.goodsImage} src={image} alt=""/>
       <h2 className={styles.goodsHeading}>{title}</h2>
       <div className={styles.goodsFooter}>
@@ -12,7 +17,9 @@ const GoodsItem = ({title, image, price}) => {
           <p>ЦЕНА:</p>
           <span>{price} руб.</span>
         </div>
-        <button className={styles.goodsAddToCart}></button>
+        <button
+          onClick={() => setActive(!active)}
+          className={active ? `${styles.goodsAddToCart} ${styles.active}` : styles.goodsAddToCart}></button>
       </div>
     </li>
   )

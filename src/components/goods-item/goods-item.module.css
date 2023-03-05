@@ -15,12 +15,16 @@
   position: absolute;
   width: 32px;
   height: 32px;
+  border: 1px solid #F8F8F8;
   border-radius: 7px;
-  border: none;
   cursor: pointer;
-  background: url(../../images/like-svg.svg) #FEF0F0 center center no-repeat;
+  background: url(../../images/like.svg) center center no-repeat;
   top: 30px;
   left: 30px;
+}
+
+.liked {
+  background: url(../../images/liked.svg) #FEF0F0 center center no-repeat;
 }
 
 .goodsImage {
@@ -47,6 +51,10 @@
   border-radius: 8px;
   cursor: pointer;
   background: url(../../images/add-svg.svg) transparent center center no-repeat;
+}
+
+.active {
+  background: url(../../images/add-done-svg.svg) center center #3CC755 no-repeat;
 }
 
 .goodsPrice p {

@@ -1,17 +1,20 @@
-import './app.module.css';
+import './app.module.css'
 import Header from '../header/header'
-import styles from './app.module.css'
 import GoodsList from '../goods-list/goods-list'
 import Cart from '../cart/cart'
+import {useState} from 'react'
+import styles from './app.module.css'
 
 function App() {
+  const [visible, setVisible] = useState(false)
+
   return (
     <div className={styles.app}>
-      <Header />
+      <Header setVisible={setVisible}/>
       <GoodsList />
-      <Cart />
+      <Cart visible={visible} setVisible={setVisible} />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

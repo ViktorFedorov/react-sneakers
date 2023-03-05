@@ -1,9 +1,18 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import GoodsItem from '../goods-item/goods-item'
-import sneakers from '../../services/test-data'
+import {getGoodsList} from '../../services/api'
 import styles from './goods-list.module.css'
+import SpinnerLoader from '../spinner-loader/spinner-loader'
 
 const GoodsList = () => {
+  const [goods, setGoods] = useState([])
+
+  useEffect(() => {
+    getGoodsList()
+      .then(setGoods)
+      .catch(console.log)
+  }, [])
+
   return (
     <div className={styles.goods}>
       <div className={styles.goodsListHeading}>
@@ -14,17 +23,20 @@ const GoodsList = () => {
           type="text"/>
       </div>
       <ul className={styles.goodsList}>
-        {
-          sneakers.map(({title, image, price}) => {
+        {goods.length ?
+          goods.map(({title, image, price}) => {
             return <GoodsItem
               key={title}
               title={title}
               image={image}
               price={price}
             />
-          })
+          }) : <SpinnerLoader />
         }
       </ul>
+
+
+
     </div>
   )
 }

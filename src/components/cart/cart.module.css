@@ -21,6 +21,21 @@
   padding-right: 10px;
 }
 
+.cartTitle {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cartClose {
+  width: 32px;
+  height: 32px;
+  border: 1px solid #DBDBDB;
+  border-radius: 8px;
+  background: url(../../images/remove-btn.svg) no-repeat center center transparent;
+  cursor: pointer;
+  transition: all ease-in-out 0.2s;
+}
+
 .goodsInCart::-webkit-scrollbar {
   width: 5px;               /* ширина scrollbar */
 }
