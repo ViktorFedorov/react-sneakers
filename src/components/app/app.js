@@ -9,14 +9,26 @@ function App() {
   const [visible, setVisible] = useState(false)
   const [goodsInCart, setGoods] = useState([])
 
-  const test = (item) => {
+  const addGoodToCart = (item) => {
     setGoods([...goodsInCart, item])
   }
+
+
+
+
+  /////////////////////////////////////////////////////////////////////////
+  const removeGoodFromCart = (id) => {
+    const prepareGoodsList = goodsInCart.filter(good => good.id === id)
+    setGoods(prepareGoodsList)
+  }
+
+
+
 
   return (
     <div className={styles.app}>
       <Header setVisible={setVisible}/>
-      <GoodsList addGoodToCart={test} />
+      <GoodsList addGoodToCart={addGoodToCart} />
       <Cart
         goods={goodsInCart}
         visible={visible}
