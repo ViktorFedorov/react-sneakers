@@ -7,12 +7,20 @@ import styles from './app.module.css'
 
 function App() {
   const [visible, setVisible] = useState(false)
+  const [goodsInCart, setGoods] = useState([])
+
+  const test = (item) => {
+    setGoods([...goodsInCart, item])
+  }
 
   return (
     <div className={styles.app}>
       <Header setVisible={setVisible}/>
-      <GoodsList />
-      <Cart visible={visible} setVisible={setVisible} />
+      <GoodsList addGoodToCart={test} />
+      <Cart
+        goods={goodsInCart}
+        visible={visible}
+        setVisible={setVisible} />
     </div>
   )
 }

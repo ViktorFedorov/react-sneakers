@@ -4,7 +4,7 @@ import {getGoodsList} from '../../services/api'
 import styles from './goods-list.module.css'
 import SpinnerLoader from '../spinner-loader/spinner-loader'
 
-const GoodsList = () => {
+const GoodsList = ({addGoodToCart}) => {
   const [goods, setGoods] = useState([])
 
   useEffect(() => {
@@ -24,19 +24,15 @@ const GoodsList = () => {
       </div>
       <ul className={styles.goodsList}>
         {goods.length ?
-          goods.map(({title, image, price}) => {
+          goods.map(sneaker => {
             return <GoodsItem
-              key={title}
-              title={title}
-              image={image}
-              price={price}
+              key={sneaker.title}
+              sneaker={sneaker}
+              addGoodToCart={addGoodToCart}
             />
           }) : <SpinnerLoader />
         }
       </ul>
-
-
-
     </div>
   )
 }

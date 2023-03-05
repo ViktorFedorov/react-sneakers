@@ -3,7 +3,7 @@ import styles from './cart.module.css'
 import CartItem from '../cart-item/cart-item'
 import CartFooter from '../cart-footer/cart-footer'
 
-const Cart = ({visible, setVisible}) => {
+const Cart = ({goods, visible, setVisible}) => {
 
   useEffect(() => {
     const handlerPressButton = (e) => {
@@ -31,11 +31,13 @@ const Cart = ({visible, setVisible}) => {
                 onClick={() => setVisible(false)}
                 className={styles.cartClose} title='закрыть корзину'></button>
             </div>
-            <CartItem />
-            <CartItem />
-            <CartItem />
-            <CartItem />
-            <CartItem />
+            {
+              goods.length
+              ? goods.map(({title, price, image}) => {
+                  return <CartItem key={title} title={title} price={price} image={image}/>
+                })
+              : 'Тут пока пусто'
+            }
           </div>
           <CartFooter />
         </div>
