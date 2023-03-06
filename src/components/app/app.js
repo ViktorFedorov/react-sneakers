@@ -10,26 +10,24 @@ function App() {
   const [goodsInCart, setGoods] = useState([])
 
   const addGoodToCart = (item) => {
-    setGoods([...goodsInCart, item])
+    // добавляем уникальный идентификатор каждому товару в корзине для корректного их удаления
+    const id = new Date().getSeconds() + Math.random()
+    const prepareData = {...item, id}
+
+    setGoods([...goodsInCart, prepareData])
   }
 
-
-
-
-  /////////////////////////////////////////////////////////////////////////
   const removeGoodFromCart = (id) => {
-    const prepareGoodsList = goodsInCart.filter(good => good.id === id)
+    const prepareGoodsList = goodsInCart.filter(good => good.id !== id)
     setGoods(prepareGoodsList)
   }
-
-
-
 
   return (
     <div className={styles.app}>
       <Header setVisible={setVisible}/>
       <GoodsList addGoodToCart={addGoodToCart} />
       <Cart
+        remove={removeGoodFromCart}
         goods={goodsInCart}
         visible={visible}
         setVisible={setVisible} />

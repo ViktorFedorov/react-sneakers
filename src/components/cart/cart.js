@@ -3,7 +3,7 @@ import styles from './cart.module.css'
 import CartItem from '../cart-item/cart-item'
 import CartFooter from '../cart-footer/cart-footer'
 
-const Cart = ({goods, visible, setVisible}) => {
+const Cart = ({remove, goods, visible, setVisible}) => {
 
   useEffect(() => {
     const handlerPressButton = (e) => {
@@ -33,8 +33,8 @@ const Cart = ({goods, visible, setVisible}) => {
             </div>
             {
               goods.length
-              ? goods.map(({title, price, image}) => {
-                  return <CartItem key={title} title={title} price={price} image={image}/>
+              ? goods.map(({id, title, price, image}) => {
+                  return <CartItem key={id} id={id} title={title} price={price} image={image} remove={remove}/>
                 })
               : 'Тут пока пусто'
             }
