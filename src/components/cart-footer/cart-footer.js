@@ -1,13 +1,13 @@
 import React from 'react'
 import styles from './cart-footer.module.css'
 
-const CartFooter = () => {
+const CartFooter = ({sum}) => {
   return (
     <div className={styles.cartFooter}>
       <div className={styles.cartSum}>
         <span className={styles.mediumText}>Итого:</span>
         <span className={styles.dashed}></span>
-        <span className={styles.boldText}>21498 руб.</span>
+        <span className={styles.boldText}>{sum} руб.</span>
       </div>
       <div className={styles.cartSum}>
         <span className={styles.mediumText}>Налог 5%:</span>

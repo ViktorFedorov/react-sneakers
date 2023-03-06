@@ -4,7 +4,6 @@ import CartItem from '../cart-item/cart-item'
 import CartFooter from '../cart-footer/cart-footer'
 
 const Cart = ({remove, goods, visible, setVisible}) => {
-
   useEffect(() => {
     const handlerPressButton = (e) => {
       if (e.key === 'Escape') setVisible(false)
@@ -17,6 +16,8 @@ const Cart = ({remove, goods, visible, setVisible}) => {
       document.removeEventListener('keydown', handlerPressButton)
     }
   }, [setVisible])
+
+  const getSum = () => goods.length ? goods.reduce((acc, item) => (acc + item.price), 0) : 0
 
   return (
     <div
@@ -34,12 +35,12 @@ const Cart = ({remove, goods, visible, setVisible}) => {
             {
               goods.length
               ? goods.map(({id, title, price, image}) => {
-                  return <CartItem key={id} id={id} title={title} price={price} image={image} remove={remove}/>
+                  return <CartItem key={id} id={id} title={title} price={price} image={image} remove={remove} />
                 })
               : 'Тут пока пусто'
             }
           </div>
-          <CartFooter />
+          <CartFooter sum={getSum()} />
         </div>
       </div>
     </div>
