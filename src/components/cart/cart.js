@@ -18,7 +18,7 @@ const Cart = ({remove, goods, visible, setVisible}) => {
     }
   }, [setVisible])
 
-  const getSum = () => goods.length ? goods.reduce((acc, item) => (acc + item.price), 0) : 0
+  const getSum = () => goods.length ? goods.reduce((acc, item) => (acc + item.price), 0) : null
 
   return (
     <div
@@ -41,7 +41,9 @@ const Cart = ({remove, goods, visible, setVisible}) => {
               : <EmptyCart />
             }
           </div>
-          {getSum() ? <CartFooter sum={getSum()} /> : null}
+          {
+            getSum() && <CartFooter sum={getSum()} />
+          }
         </div>
       </div>
     </div>
