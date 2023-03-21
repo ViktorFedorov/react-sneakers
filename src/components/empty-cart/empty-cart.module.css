@@ -1,0 +1,31 @@
+.empty {
+  background: url(../../images/empty-trash.png) no-repeat center center;
+  height: 120px;
+  width: 120px;
+  margin-bottom: 21px;
+}
+
+.wrapper {
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: auto;
+  align-items: center;
+}
+
+.header {
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 27px;
+  margin-bottom: 9px;
+}
+
+.description {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  opacity: .4;
+  text-align: center;
+}
+

@@ -2,6 +2,7 @@ import React, {useEffect} from 'react'
 import styles from './cart.module.css'
 import CartItem from '../cart-item/cart-item'
 import CartFooter from '../cart-footer/cart-footer'
+import EmptyCart from '../empty-cart/empty-cart'
 
 const Cart = ({remove, goods, visible, setVisible}) => {
   useEffect(() => {
@@ -30,17 +31,17 @@ const Cart = ({remove, goods, visible, setVisible}) => {
               <h2 className={styles.cartHeader}>Корзина</h2>
               <button
                 onClick={() => setVisible(false)}
-                className={styles.cartClose} title='закрыть корзину'></button>
+                className={styles.cartClose} title='закрыть корзину'> </button>
             </div>
             {
               goods.length
               ? goods.map(({id, title, price, image}) => {
                   return <CartItem key={id} id={id} title={title} price={price} image={image} remove={remove} />
                 })
-              : 'Тут пока пусто'
+              : <EmptyCart />
             }
           </div>
-          <CartFooter sum={getSum()} />
+          {getSum() ? <CartFooter sum={getSum()} /> : null}
         </div>
       </div>
     </div>
