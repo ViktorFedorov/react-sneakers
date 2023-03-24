@@ -31,7 +31,8 @@ const Cart = ({remove, goods, visible, setVisible}) => {
               <h2 className={styles.cartHeader}>Корзина</h2>
               <button
                 onClick={() => setVisible(false)}
-                className={styles.cartClose} title='закрыть корзину'> </button>
+                className={styles.cartClose} title='закрыть корзину'>
+              </button>
             </div>
             {
               goods.length
