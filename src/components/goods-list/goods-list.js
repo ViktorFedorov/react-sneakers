@@ -6,25 +6,38 @@ import SpinnerLoader from '../spinner-loader/spinner-loader'
 
 const GoodsList = ({addGoodToCart}) => {
   const [goods, setGoods] = useState([])
+  const [search, setSearch] = useState('')
 
   useEffect(() => {
     getGoodsList()
       .then(setGoods)
       .catch(console.log)
   }, [])
+  
+  const handlerInput = (e) => {
+    setSearch(e.target.value)
+  }
+
+  const filteredData = goods.filter(good => {
+    return good.title.includes(search)
+  })
+
+  console.log(filteredData)
 
   return (
     <div className={styles.goods}>
       <div className={styles.goodsListHeading}>
         <h1>Все кроссовки</h1>
         <input
+          onChange={handlerInput}
+          value={search}
           className={styles.searchBar}
           placeholder='Поиск...'
           type="text"/>
       </div>
       <ul className={styles.goodsList}>
         {goods.length ?
-          goods.map(sneaker => {
+          filteredData.map(sneaker => {
             return <GoodsItem
               key={sneaker.title}
               sneaker={sneaker}
