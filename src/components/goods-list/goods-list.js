@@ -19,10 +19,8 @@ const GoodsList = ({addGoodToCart}) => {
   }
 
   const filteredData = goods.filter(good => {
-    return good.title.includes(search)
+    return good.title.toLowerCase().includes(search.toLowerCase())
   })
-
-  console.log(filteredData)
 
   return (
     <div className={styles.goods}>
