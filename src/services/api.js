@@ -6,6 +6,12 @@ const getGoodsList = () => {
     .then(checkResponse)
 }
 
+const getGoodsInCart = () => {
+  return fetch(`${baseUrl}/goodsInCart`)
+    .then(checkResponse)
+}
+
 export {
-  getGoodsList
+  getGoodsList,
+  getGoodsInCart
 }
