@@ -8,16 +8,17 @@ const GoodsList = ({addGoodToCart}) => {
   const [goods, setGoods] = useState([])
   const [search, setSearch] = useState('')
 
+  // получаем список товаров с бэка при первом рэндере
   useEffect(() => {
     getGoodsList()
       .then(setGoods)
       .catch(console.log)
   }, [])
-  
-  const handlerInput = (e) => {
-    setSearch(e.target.value)
-  }
 
+  // записываем искомую строку в стэйт
+  const handlerInput = (e) => setSearch(e.target.value)
+
+  // данные для отображения с учетом поиска
   const filteredData = goods.filter(good => {
     return good.title.toLowerCase().includes(search.toLowerCase())
   })

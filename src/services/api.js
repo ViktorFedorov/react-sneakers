@@ -11,7 +11,24 @@ const getGoodsInCart = () => {
     .then(checkResponse)
 }
 
+const addGoodInCart = (good) => {
+  return fetch(`${baseUrl}/goodsInCart`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(good)
+  })
+    .then(checkResponse)
+}
+
+const removeGoodFromCart = (id) => {
+  return null
+}
+
 export {
   getGoodsList,
-  getGoodsInCart
+  getGoodsInCart,
+  addGoodInCart,
+  removeGoodFromCart
 }

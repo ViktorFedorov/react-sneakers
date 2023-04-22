@@ -5,6 +5,7 @@ const GoodsItem = ({sneaker, addGoodToCart}) => {
   const [active, setActive] = useState(false)
   const [like, setLike] = useState(false)
 
+  // кнопка 'добавить в корзину'
   const addHandler = () => {
     setActive(!active)
     addGoodToCart(sneaker)

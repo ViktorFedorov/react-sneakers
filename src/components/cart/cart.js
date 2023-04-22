@@ -3,30 +3,8 @@ import styles from './cart.module.css'
 import CartItem from '../cart-item/cart-item'
 import CartFooter from '../cart-footer/cart-footer'
 import EmptyCart from '../empty-cart/empty-cart'
-import {getGoodsInCart} from '../../services/api'
 
-const Cart = ({remove, visible, setVisible}) => {
-  const [goods, setGoods] = useState([])
-
-  useEffect(() => {
-    getGoodsInCart()
-      .then(setGoods)
-      .catch(console.log)
-  }, [])
-
-  // const addGoodToCart = (item) => {
-  //   // добавляем уникальный идентификатор каждому товару в корзине для корректного их удаления
-  //   const id = new Date().getSeconds() + Math.random()
-  //   const prepareData = {...item, id}
-  //
-  //   setGoods([...goodsInCart, prepareData])
-  // }
-  //
-  // const removeGoodFromCart = (id) => {
-  //   const prepareGoodsList = goodsInCart.filter(good => good.id !== id)
-  //   setGoods(prepareGoodsList)
-  // }
-
+const Cart = ({remove, goodsInCart, visible, setVisible}) => {
   useEffect(() => {
     const handlerPressButton = (e) => {
       if (e.key === 'Escape') setVisible(false)
@@ -40,7 +18,7 @@ const Cart = ({remove, visible, setVisible}) => {
     }
   }, [setVisible])
 
-  const getSum = () => goods.length ? goods.reduce((acc, item) => (acc + item.price), 0) : null
+  const getSum = () => goodsInCart.length ? goodsInCart.reduce((acc, item) => (acc + item.price), 0) : null
 
   return (
     <div
@@ -57,8 +35,8 @@ const Cart = ({remove, visible, setVisible}) => {
               </button>
             </div>
             {
-              goods.length
-              ? goods.map(({id, title, price, image}) => {
+              goodsInCart.length
+              ? goodsInCart.map(({id, title, price, image}) => {
                   return <CartItem key={id} id={id} title={title} price={price} image={image} remove={remove} />
                 })
               : <EmptyCart />
