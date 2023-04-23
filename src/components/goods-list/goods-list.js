@@ -26,13 +26,16 @@ const GoodsList = ({addGoodToCart}) => {
   return (
     <div className={styles.goods}>
       <div className={styles.goodsListHeading}>
-        <h1>Все кроссовки</h1>
-        <input
-          onChange={handlerInput}
-          value={search}
-          className={styles.searchBar}
-          placeholder='Поиск...'
-          type="text"/>
+        <h1>{search ? `Поиск по наименованию: ${search}` : 'Все кроссовки'}</h1>
+        <div className={styles.searchWrapper}>
+          <input
+            onChange={handlerInput}
+            value={search}
+            className={styles.searchBar}
+            placeholder='Поиск...'
+            type="text"/>
+          {search && <div className={styles.clear} onClick={() => setSearch('')} title='Очистить'></div>}
+        </div>
       </div>
       <ul className={styles.goodsList}>
         {goods.length ?
