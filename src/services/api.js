@@ -11,13 +11,13 @@ const getGoodsInCart = () => {
     .then(checkResponse)
 }
 
-const addGoodInCart = (good) => {
+const addGoodInCart = (product) => {
   return fetch(`${baseUrl}/goodsInCart`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify(good)
+    body: JSON.stringify(product)
   })
     .then(checkResponse)
 }
