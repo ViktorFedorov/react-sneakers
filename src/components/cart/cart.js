@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect} from 'react'
 import styles from './cart.module.css'
 import CartItem from '../cart-item/cart-item'
 import CartFooter from '../cart-footer/cart-footer'

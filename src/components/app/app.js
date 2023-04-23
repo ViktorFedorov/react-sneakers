@@ -3,7 +3,7 @@ import Header from '../header/header'
 import GoodsList from '../goods-list/goods-list'
 import Cart from '../cart/cart'
 import {useEffect, useState} from 'react'
-import {addGoodInCart, getGoodsInCart} from '../../services/api'
+import {addGoodInCart, getGoodsInCart, removeGood} from '../../services/api'
 import styles from './app.module.css'
 
 function App() {
@@ -24,10 +24,18 @@ function App() {
     отправляем добавленный в корзину товар на бэк
     в ответ приходит объект с товаром, который добавляем в стэйт для перерендера корзины
   */
-  const addGoodToCart = (good) => {
-    addGoodInCart(good)
-      .then(good => {
-        setGoodsInCart([...goodsInCart, good])
+  const addGoodToCart = (product) => {
+    addGoodInCart(product)
+      .then(item => {
+        setGoodsInCart([...goodsInCart, item])
+      })
+      .catch(console.log)
+  }
+
+  const removeGoodFromCart = (id) => {
+    removeGood(id)
+      .then(product => {
+        setGoodsInCart(goodsInCart.filter(item => item.id !== product.id))
       })
       .catch(console.log)
   }
@@ -38,6 +46,7 @@ function App() {
       <GoodsList addGoodToCart={addGoodToCart}/>
       <Cart
         goodsInCart={goodsInCart}
+        remove={removeGoodFromCart}
         visible={visible}
         setVisible={setVisible} />
     </div>

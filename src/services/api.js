@@ -22,13 +22,20 @@ const addGoodInCart = (good) => {
     .then(checkResponse)
 }
 
-const removeGoodFromCart = (id) => {
-  return null
+const removeGood = (id) => {
+  return fetch(`${baseUrl}/goodsInCart/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({id})
+  })
+    .then(checkResponse)
 }
 
 export {
   getGoodsList,
   getGoodsInCart,
   addGoodInCart,
-  removeGoodFromCart
+  removeGood
 }
