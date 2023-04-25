@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import styles from './goods-item.module.css'
+import {setAdded} from '../../services/api'
 
 const GoodsItem = ({sneaker, addGoodToCart}) => {
   const [active, setActive] = useState(false)
@@ -7,9 +8,17 @@ const GoodsItem = ({sneaker, addGoodToCart}) => {
 
   // кнопка 'добавить в корзину'
   const addHandler = () => {
-    setActive(!active)
+
+    console.log(sneaker.id)
+
+    setAdded(sneaker.id)
+      .then(() => setActive(!active))
+
+
     addGoodToCart(sneaker)
   }
+
+  /////// рендерить статус added с бэка
 
   return (
     <li className={styles.goodsItem}>

@@ -22,6 +22,17 @@ const addGoodInCart = (product) => {
     .then(checkResponse)
 }
 
+const setAdded = (id, product) => {
+  return fetch(`${baseUrl}/sneakersList/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({...product, added: true})
+  })
+    .then(checkResponse)
+}
+
 const removeGood = (id) => {
   return fetch(`${baseUrl}/goodsInCart/${id}`, {
     method: 'DELETE',
@@ -37,5 +48,6 @@ export {
   getGoodsList,
   getGoodsInCart,
   addGoodInCart,
+  setAdded,
   removeGood
 }
