@@ -22,13 +22,13 @@ const addGoodInCart = (product) => {
     .then(checkResponse)
 }
 
-const setAdded = (id, product) => {
+const setAdded = (id, added) => {
   return fetch(`${baseUrl}/sneakersList/${id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({...product, added: true})
+    body: JSON.stringify({added})
   })
     .then(checkResponse)
 }

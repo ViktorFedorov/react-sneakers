@@ -25,6 +25,17 @@ function App() {
     в ответ приходит объект с товаром, который добавляем в стэйт для перерендера корзины
   */
   const addGoodToCart = (product) => {
+
+    // проверим, есть ли в корзине данный товар
+    if (goodsInCart.some(el => el.title === product.title)) {
+
+      // если товар уже есть в корзине, найдем его id по заголовку
+      const {id} = goodsInCart.find(item => item.title === product.title)
+
+      // и удалим его нахрен
+      return removeGoodFromCart(id)
+    }
+
     addGoodInCart(product)
       .then(item => {
         setGoodsInCart([...goodsInCart, item])

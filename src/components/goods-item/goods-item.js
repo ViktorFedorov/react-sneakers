@@ -3,22 +3,16 @@ import styles from './goods-item.module.css'
 import {setAdded} from '../../services/api'
 
 const GoodsItem = ({sneaker, addGoodToCart}) => {
-  const [active, setActive] = useState(false)
+  const [active, setActive] = useState(sneaker.added)
   const [like, setLike] = useState(false)
 
   // кнопка 'добавить в корзину'
   const addHandler = () => {
-
-    console.log(sneaker.id)
-
-    setAdded(sneaker.id)
+    setAdded(sneaker.id, !active)
       .then(() => setActive(!active))
-
 
     addGoodToCart(sneaker)
   }
-
-  /////// рендерить статус added с бэка
 
   return (
     <li className={styles.goodsItem}>
