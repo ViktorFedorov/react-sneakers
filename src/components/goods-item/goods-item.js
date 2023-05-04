@@ -1,10 +1,10 @@
 import React, {useState} from 'react'
 import styles from './goods-item.module.css'
-import {setAdded} from '../../services/api'
+import {setAdded, setFav} from '../../services/api'
 
 const GoodsItem = ({sneaker, addGoodToCart}) => {
   const [active, setActive] = useState(sneaker.added)
-  const [like, setLike] = useState(false)
+  const [favorite, setFavorite] = useState(sneaker.favorite)
 
   // кнопка 'добавить в корзину'
   const addHandler = () => {
@@ -14,11 +14,18 @@ const GoodsItem = ({sneaker, addGoodToCart}) => {
     addGoodToCart(sneaker)
   }
 
+  // кнопка 'добавить в избранное'
+  const addToFavorite = () => {
+    // меняем аттрибут на бэке
+    setFav(sneaker.id, !favorite)
+      .then(() => setFavorite(!favorite)) // после, меняем атрибут в стэйте для перерендера
+  }
+
   return (
     <li className={styles.goodsItem}>
       <button
-        onClick={() => setLike(!like)}
-        className={like ? `${styles.addToFavorite} ${styles.liked}` : styles.addToFavorite}></button>
+        onClick={addToFavorite}
+        className={favorite ? `${styles.addToFavorite} ${styles.liked}` : styles.addToFavorite}></button>
       <img className={styles.goodsImage} src={sneaker.image} alt=""/>
       <h2 className={styles.goodsHeading}>{sneaker.title}</h2>
       <div className={styles.goodsFooter}>

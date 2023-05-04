@@ -22,6 +22,7 @@ const addGoodInCart = (product) => {
     .then(checkResponse)
 }
 
+// добавить / удалить атрибут
 const setAdded = (id, added) => {
   return fetch(`${baseUrl}/sneakersList/${id}`, {
     method: 'PUT',
@@ -29,6 +30,17 @@ const setAdded = (id, added) => {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({added})
+  })
+    .then(checkResponse)
+}
+
+const setFav = (id, favorite) => {
+  return fetch(`${baseUrl}/sneakersList/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({favorite})
   })
     .then(checkResponse)
 }
@@ -49,5 +61,6 @@ export {
   getGoodsInCart,
   addGoodInCart,
   setAdded,
+  setFav,
   removeGood
 }
