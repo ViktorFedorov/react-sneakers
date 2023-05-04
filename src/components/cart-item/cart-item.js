@@ -12,7 +12,7 @@ const CartItem = ({title, price, image, remove, id}) => {
         </p>
       </div>
       <button
-        onClick={() => remove(id)}
+        onClick={() => remove(id, title)}
         className={styles.cartRemove} title='удалить товар'></button>
     </div>
   )

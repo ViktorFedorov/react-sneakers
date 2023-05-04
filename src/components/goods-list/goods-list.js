@@ -1,19 +1,13 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import GoodsItem from '../goods-item/goods-item'
-import {getGoodsList} from '../../services/api'
 import styles from './goods-list.module.css'
 import SpinnerLoader from '../spinner-loader/spinner-loader'
 
-const GoodsList = ({addGoodToCart}) => {
-  const [goods, setGoods] = useState([])
+const GoodsList = ({goods, addGoodToCart}) => {
+
   const [search, setSearch] = useState('')
 
-  // получаем список товаров с бэка при первом рэндере
-  useEffect(() => {
-    getGoodsList()
-      .then(setGoods)
-      .catch(console.log)
-  }, [])
+
 
   // записываем искомую строку в стэйт
   const handlerInput = (e) => setSearch(e.target.value)

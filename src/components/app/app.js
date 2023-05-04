@@ -3,15 +3,25 @@ import Header from '../header/header'
 import GoodsList from '../goods-list/goods-list'
 import Cart from '../cart/cart'
 import {useEffect, useState} from 'react'
-import {addGoodInCart, getGoodsInCart, removeGood} from '../../services/api'
+import {addGoodInCart, getGoodsInCart, getGoodsList, removeGood, setAdded} from '../../services/api'
 import styles from './app.module.css'
 
 function App() {
   // видимость корзины
   const [visible, setVisible] = useState(false)
 
+  // список товаров
+  const [goods, setGoods] = useState([])
+
   // товары в корзине
   const [goodsInCart, setGoodsInCart] = useState([])
+
+  // получаем список товаров с бэка при первом рэндере
+  useEffect(() => {
+    getGoodsList()
+      .then(setGoods)
+      .catch(console.log)
+  }, [])
 
   // получаем с бэка список товаров в корзине
   useEffect(() => {
@@ -43,7 +53,21 @@ function App() {
       .catch(console.log)
   }
 
-  const removeGoodFromCart = (id) => {
+  const removeGoodFromCart = (id, title) => {
+
+    // найдем товар который удалили из корзины
+    const deletedProduct = goods.find(product => product.title === title)
+
+    // если товар найден - изменим атрибут на бэке
+    if (deletedProduct) {
+      setAdded(deletedProduct.id, false)
+        .then(console.log)
+    }
+
+    /// надо как то передать данные в карточку для перерендера компонента продукта
+
+
+
     removeGood(id)
       .then(product => {
         setGoodsInCart(goodsInCart.filter(item => item.id !== product.id))
@@ -54,7 +78,9 @@ function App() {
   return (
     <div className={styles.app}>
       <Header setVisible={setVisible}/>
-      <GoodsList addGoodToCart={addGoodToCart}/>
+      <GoodsList
+        goods={goods}
+        addGoodToCart={addGoodToCart}/>
       <Cart
         goodsInCart={goodsInCart}
         remove={removeGoodFromCart}
