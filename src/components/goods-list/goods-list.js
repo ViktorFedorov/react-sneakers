@@ -3,11 +3,9 @@ import GoodsItem from '../goods-item/goods-item'
 import styles from './goods-list.module.css'
 import SpinnerLoader from '../spinner-loader/spinner-loader'
 
-const GoodsList = ({goods, addGoodToCart}) => {
+const GoodsList = ({goods, addGoodToCart, setFavorites}) => {
 
   const [search, setSearch] = useState('')
-
-
 
   // записываем искомую строку в стэйт
   const handlerInput = (e) => setSearch(e.target.value)
@@ -37,6 +35,7 @@ const GoodsList = ({goods, addGoodToCart}) => {
             return <GoodsItem
               key={sneaker.title}
               sneaker={sneaker}
+              setFavorites={setFavorites}
               addGoodToCart={addGoodToCart}
             />
           }) : <SpinnerLoader />

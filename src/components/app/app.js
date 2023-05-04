@@ -16,12 +16,25 @@ function App() {
   // товары в корзине
   const [goodsInCart, setGoodsInCart] = useState([])
 
+  // избранные товары
+  const [favorites, setFavorites] = useState([])
+
+  const favoritesHandler = (product) => {
+
+    // если товар есть в избранном - повторный клик удалит его
+    if (favorites.find(item => item.title === product.title)) {
+      return setFavorites(favorites.filter(item => item.title !== product.title))
+    }
+
+    setFavorites([...favorites, product])
+  }
+
   // получаем список товаров с бэка при первом рэндере
   useEffect(() => {
     getGoodsList()
       .then(setGoods)
       .catch(console.log)
-  }, [])
+  }, [visible])
 
   // получаем с бэка список товаров в корзине
   useEffect(() => {
@@ -64,8 +77,7 @@ function App() {
         .then(console.log)
     }
 
-    /// надо как то передать данные в карточку для перерендера компонента продукта
-
+    /// ????? надо как то передать данные в карточку для перерендера компонента продукта ?????
 
 
     removeGood(id)
@@ -80,7 +92,8 @@ function App() {
       <Header setVisible={setVisible}/>
       <GoodsList
         goods={goods}
-        addGoodToCart={addGoodToCart}/>
+        addGoodToCart={addGoodToCart}
+        setFavorites={favoritesHandler}/>
       <Cart
         goodsInCart={goodsInCart}
         remove={removeGoodFromCart}
