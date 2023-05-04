@@ -1,10 +1,10 @@
 import React, {useState} from 'react'
 import styles from './goods-item.module.css'
-import {setAdded, setFav} from '../../services/api'
+import {setAdded} from '../../services/api'
 
 const GoodsItem = ({sneaker, addGoodToCart, setFavorites}) => {
   const [active, setActive] = useState(sneaker.added)
-  const [favorite, setFavorite] = useState(sneaker.favorite)
+  const [favorite, setFavorite] = useState(false)
 
   // кнопка 'добавить в корзину'
   const addHandler = () => {
@@ -16,12 +16,9 @@ const GoodsItem = ({sneaker, addGoodToCart, setFavorites}) => {
 
   // кнопка 'добавить в избранное'
   const addToFavorite = () => {
-    // добавляем товар в локальный стэйт
+    // все в локальных стэйтах так как бэк платный сцукоооо
     setFavorites(sneaker)
-
-    // меняем аттрибут на бэке
-    setFav(sneaker.id, !favorite)
-      .then(() => setFavorite(!favorite)) // после, меняем атрибут в стэйте для перерендера
+    setFavorite(!favorite)
   }
 
   return (

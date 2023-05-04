@@ -29,6 +29,8 @@ function App() {
     setFavorites([...favorites, product])
   }
 
+  console.log(favorites)
+
   // получаем список товаров с бэка при первом рэндере
   useEffect(() => {
     getGoodsList()
