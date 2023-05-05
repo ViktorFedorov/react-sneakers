@@ -5,6 +5,7 @@ import Cart from '../cart/cart'
 import {useEffect, useState} from 'react'
 import {addGoodInCart, getGoodsInCart, getGoodsList, removeGood, setAdded} from '../../services/api'
 import styles from './app.module.css'
+import Favorites from '../favorites/favorites'
 
 function App() {
   // видимость корзины
@@ -28,8 +29,6 @@ function App() {
 
     setFavorites([...favorites, product])
   }
-
-  console.log(favorites)
 
   // получаем список товаров с бэка при первом рэндере
   useEffect(() => {
@@ -101,6 +100,7 @@ function App() {
         remove={removeGoodFromCart}
         visible={visible}
         setVisible={setVisible} />
+      <Favorites favorites={favorites}/>
     </div>
   )
 }
