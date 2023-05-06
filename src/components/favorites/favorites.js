@@ -1,7 +1,7 @@
 import React from 'react'
-import styles from './favorites.css'
+import styles from './favorites.module.css'
 import GoodsItem from '../goods-item/goods-item'
-import SpinnerLoader from '../spinner-loader/spinner-loader'
+import FavoritesEmpty from '../favorites-empty/favorites-empty'
 
 const Favorites = ({favorites}) => {
   return (
@@ -9,12 +9,14 @@ const Favorites = ({favorites}) => {
       <h1>Понравившиеся товары</h1>
       <ul className={styles.favoritesList}>
         {favorites.length ?
-          favorites.map(sneaker => {
-            return <GoodsItem
-              key={sneaker.title}
-              sneaker={sneaker}
-            />
-          }) : <SpinnerLoader />
+          favorites.map(product => {
+            return (
+              <GoodsItem
+                key={product.id}
+                product={product}
+              />
+            )
+          }) : <FavoritesEmpty />
         }
       </ul>
     </div>

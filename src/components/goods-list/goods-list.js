@@ -31,10 +31,10 @@ const GoodsList = ({goods, addGoodToCart, setFavorites}) => {
       </div>
       <ul className={styles.goodsList}>
         {goods.length ?
-          filteredData.map(sneaker => {
+          filteredData.map(product => {
             return <GoodsItem
-              key={sneaker.title}
-              sneaker={sneaker}
+              key={product.title}
+              product={product}
               setFavorites={setFavorites}
               addGoodToCart={addGoodToCart}
             />

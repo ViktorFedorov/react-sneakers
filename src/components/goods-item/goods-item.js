@@ -2,22 +2,22 @@ import React, {useState} from 'react'
 import styles from './goods-item.module.css'
 import {setAdded} from '../../services/api'
 
-const GoodsItem = ({sneaker, addGoodToCart, setFavorites}) => {
-  const [active, setActive] = useState(sneaker.added)
+const GoodsItem = ({product, addGoodToCart, setFavorites}) => {
+  const [active, setActive] = useState(product.added)
   const [favorite, setFavorite] = useState(false)
 
   // кнопка 'добавить в корзину'
   const addHandler = () => {
-    setAdded(sneaker.id, !active)
+    setAdded(product.id, !active)
       .then(() => setActive(!active))
 
-    addGoodToCart(sneaker)
+    addGoodToCart(product)
   }
 
   // кнопка 'добавить в избранное'
   const addToFavorite = () => {
     // все в локальных стэйтах так как бэк платный сцукоооо
-    setFavorites(sneaker)
+    setFavorites(product)
     setFavorite(!favorite)
   }
 
@@ -26,12 +26,12 @@ const GoodsItem = ({sneaker, addGoodToCart, setFavorites}) => {
       <button
         onClick={addToFavorite}
         className={favorite ? `${styles.addToFavorite} ${styles.liked}` : styles.addToFavorite}></button>
-      <img className={styles.goodsImage} src={sneaker.image} alt=""/>
-      <h2 className={styles.goodsHeading}>{sneaker.title}</h2>
+      <img className={styles.goodsImage} src={product.image} alt=""/>
+      <h2 className={styles.goodsHeading}>{product.title}</h2>
       <div className={styles.goodsFooter}>
         <div className={styles.goodsPrice}>
           <p>ЦЕНА:</p>
-          <span>{sneaker.price} руб.</span>
+          <span>{product.price} руб.</span>
         </div>
         <button
           onClick={addHandler}

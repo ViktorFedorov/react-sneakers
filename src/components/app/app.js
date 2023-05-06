@@ -21,12 +21,10 @@ function App() {
   const [favorites, setFavorites] = useState([])
 
   const favoritesHandler = (product) => {
-
     // если товар есть в избранном - повторный клик удалит его
     if (favorites.find(item => item.title === product.title)) {
       return setFavorites(favorites.filter(item => item.title !== product.title))
     }
-
     setFavorites([...favorites, product])
   }
 
@@ -35,7 +33,7 @@ function App() {
     getGoodsList()
       .then(setGoods)
       .catch(console.log)
-  }, [visible])
+  }, [])
 
   // получаем с бэка список товаров в корзине
   useEffect(() => {
