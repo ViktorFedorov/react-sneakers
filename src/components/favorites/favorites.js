@@ -7,19 +7,28 @@ const Favorites = ({favorites, setFavorites}) => {
   return (
     <div className={styles.favorites}>
       <h1>Понравившиеся товары</h1>
-      <ul className={styles.favoritesList}>
-        {favorites.length ?
-          favorites.map(product => {
-            return (
-              <GoodsItem
-                key={product.id}
-                product={product}
-                setFavorites={setFavorites}
-              />
-            )
-          }) : <FavoritesEmpty />
-        }
-      </ul>
+
+      {
+        favorites.length ? (
+          <ul className={styles.favoritesList}>
+            {
+              favorites.map(product => {
+                return <GoodsItem
+                  key={product.id}
+                  product={product}
+                  setFavorites={setFavorites}
+                />
+              })
+            }
+          </ul>
+        ) : <FavoritesEmpty />
+      }
+
+
+
+
+
+
     </div>
   )
 }

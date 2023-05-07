@@ -9,6 +9,8 @@ import Favorites from '../favorites/favorites'
 import styles from './app.module.css'
 
 function App() {
+  const [isLoading, setLoading] = useState(true)
+
   // видимость корзины
   const [visible, setVisible] = useState(false)
 
@@ -35,7 +37,6 @@ function App() {
     в ответ приходит объект с товаром, который добавляем в стэйт для перерендера корзины
   */
   const addGoodToCart = (product) => {
-
     // проверим, есть ли в корзине данный товар
     if (goodsInCart.some(el => el.title === product.title)) {
 
@@ -53,15 +54,36 @@ function App() {
       .catch(console.log)
   }
 
+
+
+
+
+
+
+
   // получаем список товаров для главной и корзины с бэка
   useEffect(() => {
+
     Promise.all([getGoodsList(), getGoodsInCart()])
       .then(([goodsList, goodsInCart]) => {
         setGoods(goodsList)
         setGoodsInCart(goodsInCart)
       })
-      .catch(console.log)
+      .catch((err) => {
+        console.log(err)
+      })
+      .finally(() => setLoading(false))
   }, [])
+
+
+
+
+
+
+
+
+
+
 
   const removeGoodFromCart = (id, title) => {
     // найдем товар который в даный момент удалили из корзины
@@ -90,6 +112,8 @@ function App() {
       .catch(console.log)
   }
 
+
+
   // сумма товаров в корзине
   const getSum = () => goodsInCart.length ? goodsInCart.reduce((acc, item) => (acc + item.price), 0) : null
 
@@ -107,7 +131,7 @@ function App() {
         setVisible={setVisible} />
 
         <Routes>
-          <Route path='/' element={<GoodsList goods={goods} addGoodToCart={addGoodToCart} setFavorites={favoritesHandler} />} />
+          <Route path='/' element={<GoodsList isLoading={isLoading} goods={goods} addGoodToCart={addGoodToCart} setFavorites={favoritesHandler} />} />
           <Route path='/favorites' element={<Favorites favorites={favorites} setFavorites={favoritesHandler} />} />
         </Routes>
 

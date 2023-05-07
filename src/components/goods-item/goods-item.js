@@ -23,6 +23,7 @@ const GoodsItem = ({product, addGoodToCart, setFavorites}) => {
       })
   }
 
+
   return (
     <li className={styles.goodsItem}>
       <button
