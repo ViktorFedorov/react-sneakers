@@ -34,6 +34,17 @@ const setAdded = (id, added) => {
     .then(checkResponse)
 }
 
+const setLiked = (id, favorite) => {
+  return fetch(`${baseUrl}/sneakersList/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({favorite})
+  })
+    .then(checkResponse)
+}
+
 const removeGood = (id) => {
   return fetch(`${baseUrl}/goodsInCart/${id}`, {
     method: 'DELETE',
@@ -50,5 +61,6 @@ export {
   getGoodsInCart,
   addGoodInCart,
   setAdded,
+  setLiked,
   removeGood
 }

@@ -4,8 +4,9 @@ import GoodsList from '../goods-list/goods-list'
 import Cart from '../cart/cart'
 import {useEffect, useState} from 'react'
 import {addGoodInCart, getGoodsInCart, getGoodsList, removeGood, setAdded} from '../../services/api'
-import styles from './app.module.css'
+import {Routes, Route} from 'react-router-dom'
 import Favorites from '../favorites/favorites'
+import styles from './app.module.css'
 
 function App() {
   // видимость корзины
@@ -25,22 +26,9 @@ function App() {
     if (favorites.find(item => item.title === product.title)) {
       return setFavorites(favorites.filter(item => item.title !== product.title))
     }
+
     setFavorites([...favorites, product])
   }
-
-  // получаем список товаров с бэка при первом рэндере
-  useEffect(() => {
-    getGoodsList()
-      .then(setGoods)
-      .catch(console.log)
-  }, [])
-
-  // получаем с бэка список товаров в корзине
-  useEffect(() => {
-    getGoodsInCart()
-      .then(setGoodsInCart)
-      .catch(console.log)
-  }, [])
 
   /*
     отправляем добавленный в корзину товар на бэк
@@ -65,19 +53,39 @@ function App() {
       .catch(console.log)
   }
 
-  const removeGoodFromCart = (id, title) => {
+  // получаем список товаров с бэка
+  useEffect(() => {
+    getGoodsList()
+      .then(setGoods)
+      .catch(console.log)
+  }, [setGoods])
 
-    // найдем товар который удалили из корзины
+  // получаем с бэка список товаров в корзине
+  useEffect(() => {
+    getGoodsInCart()
+      .then(setGoodsInCart)
+      .catch(console.log)
+  }, [])
+
+  const removeGoodFromCart = (id, title) => {
+    // найдем товар который в даный момент удалили из корзины
     const deletedProduct = goods.find(product => product.title === title)
 
     // если товар найден - изменим атрибут на бэке
     if (deletedProduct) {
       setAdded(deletedProduct.id, false)
-        .then(console.log)
+        .then((product) => {
+
+          const newState = goods.map(item => {
+            if (item.id === product.id) {
+              return {...item, added: false}
+            }
+            return item
+          })
+
+          setGoods(newState)
+        })
     }
-
-    /// ????? надо как то передать данные в карточку для перерендера компонента продукта ?????
-
 
     removeGood(id)
       .then(product => {
@@ -86,19 +94,27 @@ function App() {
       .catch(console.log)
   }
 
+  // сумма товаров в корзине
+  const getSum = () => goodsInCart.length ? goodsInCart.reduce((acc, item) => (acc + item.price), 0) : null
+
   return (
     <div className={styles.app}>
-      <Header setVisible={setVisible}/>
-      <GoodsList
-        goods={goods}
-        addGoodToCart={addGoodToCart}
-        setFavorites={favoritesHandler}/>
+      <Header
+        sum={getSum()}
+        counter={favorites.length}
+        setVisible={setVisible}/>
       <Cart
+        sum={getSum()}
         goodsInCart={goodsInCart}
         remove={removeGoodFromCart}
         visible={visible}
         setVisible={setVisible} />
-      <Favorites favorites={favorites}/>
+
+        <Routes>
+          <Route path='/' element={<GoodsList goods={goods} addGoodToCart={addGoodToCart} setFavorites={favoritesHandler} />} />
+          <Route path='/favorites' element={<Favorites favorites={favorites} setFavorites={favoritesHandler} />} />
+        </Routes>
+
     </div>
   )
 }

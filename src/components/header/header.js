@@ -3,11 +3,11 @@ import Logo from '../logo/logo'
 import styles from './header.module.css'
 import Profile from '../profile/profile'
 
-const Header = ({setVisible}) => {
+const Header = ({sum, counter, setVisible}) => {
   return (
     <div className={styles.header}>
       <Logo />
-      <Profile setVisible={setVisible}/>
+      <Profile sum={sum} counter={counter} setVisible={setVisible}/>
     </div>
   )
 }

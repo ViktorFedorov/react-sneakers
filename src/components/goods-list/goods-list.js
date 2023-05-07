@@ -1,10 +1,9 @@
 import React, {useState} from 'react'
 import GoodsItem from '../goods-item/goods-item'
-import styles from './goods-list.module.css'
 import SpinnerLoader from '../spinner-loader/spinner-loader'
+import styles from './goods-list.module.css'
 
 const GoodsList = ({goods, addGoodToCart, setFavorites}) => {
-
   const [search, setSearch] = useState('')
 
   // записываем искомую строку в стэйт

@@ -1,5 +1,6 @@
 import React from 'react'
 import styles from './favorites-empty.module.css'
+import {Link} from 'react-router-dom'
 
 const FavoritesEmpty = () => {
   return (
@@ -7,9 +8,11 @@ const FavoritesEmpty = () => {
       <div className={styles.sadFace}></div>
       <h2 className={styles.header}>Тут пока ничего нет :(</h2>
       <p className={styles.text}>Вы ничего не добавляли в избранное</p>
-      <button className={styles.buttonBack}>
-        Вернуться назад
-      </button>
+      <Link to='/'>
+        <button className={styles.buttonBack}>
+          Вернуться назад
+        </button>
+      </Link>
     </div>
   )
 }

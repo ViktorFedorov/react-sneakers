@@ -1,10 +1,10 @@
 import React, {useState} from 'react'
+import {setAdded, setLiked} from '../../services/api'
 import styles from './goods-item.module.css'
-import {setAdded} from '../../services/api'
 
 const GoodsItem = ({product, addGoodToCart, setFavorites}) => {
   const [active, setActive] = useState(product.added)
-  const [favorite, setFavorite] = useState(false)
+  const [favorite, setFavorite] = useState(product.favorite)
 
   // кнопка 'добавить в корзину'
   const addHandler = () => {
@@ -16,9 +16,11 @@ const GoodsItem = ({product, addGoodToCart, setFavorites}) => {
 
   // кнопка 'добавить в избранное'
   const addToFavorite = () => {
-    // все в локальных стэйтах так как бэк платный сцукоооо
-    setFavorites(product)
-    setFavorite(!favorite)
+    setLiked(product.id, !favorite)
+      .then((product) => {
+        setFavorite(!favorite)
+        setFavorites(product)
+      })
   }
 
   return (

@@ -4,7 +4,7 @@ import CartItem from '../cart-item/cart-item'
 import CartFooter from '../cart-footer/cart-footer'
 import EmptyCart from '../empty-cart/empty-cart'
 
-const Cart = ({remove, goodsInCart, visible, setVisible}) => {
+const Cart = ({sum, remove, goodsInCart, visible, setVisible}) => {
   useEffect(() => {
     const handlerPressButton = (e) => {
       if (e.key === 'Escape') setVisible(false)
@@ -18,8 +18,8 @@ const Cart = ({remove, goodsInCart, visible, setVisible}) => {
     }
   }, [setVisible])
 
-  const getSum = () => goodsInCart.length ? goodsInCart.reduce((acc, item) => (acc + item.price), 0) : null
-  const getTax = () => getSum() ? getSum() * 0.05 : null
+
+  const getTax = () => sum ? sum * 0.05 : null
 
   return (
     <div
@@ -44,7 +44,7 @@ const Cart = ({remove, goodsInCart, visible, setVisible}) => {
             }
           </div>
           {
-            getSum() && <CartFooter sum={getSum()} tax={getTax()}/>
+            sum && <CartFooter sum={sum} tax={getTax()}/>
           }
         </div>
       </div>
