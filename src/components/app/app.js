@@ -53,17 +53,13 @@ function App() {
       .catch(console.log)
   }
 
-  // получаем список товаров с бэка
+  // получаем список товаров для главной и корзины с бэка
   useEffect(() => {
-    getGoodsList()
-      .then(setGoods)
-      .catch(console.log)
-  }, [setGoods])
-
-  // получаем с бэка список товаров в корзине
-  useEffect(() => {
-    getGoodsInCart()
-      .then(setGoodsInCart)
+    Promise.all([getGoodsList(), getGoodsInCart()])
+      .then(([goodsList, goodsInCart]) => {
+        setGoods(goodsList)
+        setGoodsInCart(goodsInCart)
+      })
       .catch(console.log)
   }, [])
 
