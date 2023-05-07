@@ -40,7 +40,7 @@ const Cart = ({sum, remove, goodsInCart, visible, setVisible}) => {
               ? goodsInCart.map(({id, title, price, image}) => {
                   return <CartItem key={id} id={id} title={title} price={price} image={image} remove={remove} />
                 })
-              : <EmptyCart />
+              : <EmptyCart setVisible={setVisible} />
             }
           </div>
           {
