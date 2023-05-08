@@ -1,15 +1,16 @@
-import React from 'react'
-import styles from './favorites.module.css'
+import React, {useContext} from 'react'
 import GoodsItem from '../goods-item/goods-item'
 import FavoritesEmpty from '../favorites-empty/favorites-empty'
+import {FavoritesContext} from '../app/app'
+import styles from './favorites.module.css'
 
-const Favorites = ({favorites, setFavorites}) => {
+const Favorites = ({setFavorites}) => {
+  const favorites = useContext(FavoritesContext)
+
   return (
     <div className={styles.favorites}>
       <h1>Понравившиеся товары</h1>
-
-      {
-        favorites.length ? (
+      {favorites.length ? (
           <ul className={styles.favoritesList}>
             {
               favorites.map(product => {
@@ -23,12 +24,6 @@ const Favorites = ({favorites, setFavorites}) => {
           </ul>
         ) : <FavoritesEmpty />
       }
-
-
-
-
-
-
     </div>
   )
 }

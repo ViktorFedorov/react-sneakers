@@ -3,15 +3,12 @@ import {setAdded, setLiked} from '../../services/api'
 import styles from './goods-item.module.css'
 
 const GoodsItem = ({product, addGoodToCart, setFavorites}) => {
-  const [active, setActive] = useState(product.added)
   const [favorite, setFavorite] = useState(product.favorite)
 
   // кнопка 'добавить в корзину'
   const addHandler = () => {
-    setAdded(product.id, !active)
-      .then(() => setActive(!active))
-
-    addGoodToCart(product)
+    setAdded(product.id, !product.active)
+      .then(() => addGoodToCart(product))
   }
 
   // кнопка 'добавить в избранное'
@@ -22,7 +19,6 @@ const GoodsItem = ({product, addGoodToCart, setFavorites}) => {
         setFavorites(product)
       })
   }
-
 
   return (
     <li className={styles.goodsItem}>
@@ -38,7 +34,7 @@ const GoodsItem = ({product, addGoodToCart, setFavorites}) => {
         </div>
         <button
           onClick={addHandler}
-          className={active ? `${styles.goodsAddToCart} ${styles.active}` : styles.goodsAddToCart}></button>
+          className={product.added ? `${styles.goodsAddToCart} ${styles.active}` : styles.goodsAddToCart}></button>
       </div>
     </li>
   )
