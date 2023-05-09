@@ -1,6 +1,7 @@
 import React from 'react'
 import {setAdded, setLiked} from '../../services/api'
 import styles from './goods-item.module.css'
+import {Link} from 'react-router-dom'
 
 const GoodsItem = ({product, addGoodToCart, setFavorites}) => {
   // добавить в корзину
@@ -21,7 +22,9 @@ const GoodsItem = ({product, addGoodToCart, setFavorites}) => {
         onClick={addToFavorite}
         className={product.favorite ? `${styles.addToFavorite} ${styles.liked}` : styles.addToFavorite}></button>
       <img className={styles.goodsImage} src={product.image} alt=""/>
-      <h2 className={styles.goodsHeading}>{product.title}</h2>
+
+      <Link to={`/products/${product.id}`} className={styles.goodsHeading} title='Подробнее'>{product.title}</Link>
+
       <div className={styles.goodsFooter}>
         <div className={styles.goodsPrice}>
           <p>ЦЕНА:</p>

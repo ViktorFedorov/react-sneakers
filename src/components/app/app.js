@@ -7,6 +7,7 @@ import {addGoodInCart, getGoodsInCart, getGoodsList, removeGood, setAdded} from 
 import {Routes, Route} from 'react-router-dom'
 import Favorites from '../favorites/favorites'
 import styles from './app.module.css'
+import ProductDetails from '../product-details/product-details'
 
 // просто для попробовать фичу создал контекст для избранных товаров
 export const FavoritesContext = React.createContext(null)
@@ -149,6 +150,9 @@ function App() {
             element={<FavoritesContext.Provider value={favorites}>
                         <Favorites setFavorites={favoritesHandler} />
                      </FavoritesContext.Provider>} />
+
+          <Route path='/products/:id' element={<ProductDetails products={goods} />} />
+
         </Routes>
     </div>
   )
