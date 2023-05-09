@@ -5,6 +5,7 @@ import {FavoritesContext} from '../app/app'
 import styles from './favorites.module.css'
 
 const Favorites = ({setFavorites}) => {
+  // достаем список избранного из контекста
   const favorites = useContext(FavoritesContext)
 
   return (

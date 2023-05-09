@@ -8,6 +8,7 @@ import {Routes, Route} from 'react-router-dom'
 import Favorites from '../favorites/favorites'
 import styles from './app.module.css'
 
+// просто для попробовать фичу создал контекст для избранных товаров
 export const FavoritesContext = React.createContext(null)
 
 function App() {
@@ -26,12 +27,42 @@ function App() {
   // избранные товары
   const [favorites, setFavorites] = useState([])
 
+  // получаем список товаров для главной и корзины с бэка
+  useEffect(() => {
+    setLoading(true)
+
+    Promise.all([getGoodsList(), getGoodsInCart()])
+      .then(([goodsList, goodsInCart]) => {
+        setGoods(goodsList)
+        setGoodsInCart(goodsInCart)
+      })
+      .catch(console.log)
+      .finally(() => setLoading(false))
+  }, [])
+
+  // изменяет атрибут у переданного продукта в стэйте
+  const changeAddedAttr = (product, attr, bool) => {
+    return goods.map(item => {
+      if (item.title === product.title) {
+        return {...item, [attr]: bool}
+      }
+      return item
+    })
+  }
+
   const favoritesHandler = (product) => {
+    // поменяем аттрибут - для перерендера
+    const updatedGoods = changeAddedAttr(product, 'favorite', true)
+    setGoods(updatedGoods)
+
     // если товар есть в избранном - повторный клик удалит его
     if (favorites.find(item => item.title === product.title)) {
+      // поменяем аттрибут
+      const updatedGoods = changeAddedAttr(product, 'favorite', false)
+      setGoods(updatedGoods)
+
       return setFavorites(favorites.filter(item => item.title !== product.title))
     }
-
     setFavorites([...favorites, product])
   }
 
@@ -48,12 +79,7 @@ function App() {
       const {title} = goodsInCart.find(item => item.title === product.title)
 
       // поменяем атрибут в стэйте у этого товара на не добавленный
-      const updatedGoods = goods.map(item => {
-        if (item.title === product.title) {
-          return {...item, added: false}
-        }
-        return item
-      })
+      const updatedGoods = changeAddedAttr(product, 'added', false)
       setGoods(updatedGoods)
 
       // и удалим его из корзины
@@ -61,12 +87,7 @@ function App() {
     }
 
     // поменяем атрибут в стэйте у этого товара на добавленный
-    const updatedGoods = goods.map(item => {
-      if (item.title === product.title) {
-        return {...item, added: true}
-      }
-      return item
-    })
+    const updatedGoods = changeAddedAttr(product, 'added', true)
     setGoods(updatedGoods)
 
     // и добавим в корзину на бэке
@@ -77,21 +98,7 @@ function App() {
       .catch(console.log)
   }
 
-  // получаем список товаров для главной и корзины с бэка
-  useEffect(() => {
-    setLoading(true)
-
-    Promise.all([getGoodsList(), getGoodsInCart()])
-      .then(([goodsList, goodsInCart]) => {
-        setGoods(goodsList)
-        setGoodsInCart(goodsInCart)
-      })
-      .catch(console.log)
-      .finally(() => setLoading(false))
-  }, [])
-
   const removeGoodFromCart = (id, title) => {
-
     // найдем товар который в даный момент удалили из корзины
     const deletedProduct = goods.find(product => product.title === title)
 
@@ -99,13 +106,8 @@ function App() {
     if (deletedProduct) {
       setAdded(deletedProduct.id, false)
         .then((product) => {
-          const newState = goods.map(item => {
-            if (item.id === product.id) {
-              return {...item, added: false}
-            }
-            return item
-          })
-          setGoods(newState)
+          const updatedGoods = changeAddedAttr(product, 'added', false)
+          setGoods(updatedGoods)
         })
         .catch(console.log)
     }
