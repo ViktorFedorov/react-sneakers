@@ -1,6 +1,5 @@
 import React from 'react'
-import {useParams} from 'react-router-dom'
-import GoodsItem from '../goods-item/goods-item'
+import {Link, useParams} from 'react-router-dom'
 import styles from './product-details.module.css'
 
 const ProductDetails = ({products}) => {
@@ -13,7 +12,19 @@ const ProductDetails = ({products}) => {
   return (
     <div className={styles.details}>
       <h1>{product ? product.title : 'загружаю ...'}</h1>
-      {product && <GoodsItem product={product} />}
+      <img src={product.image} alt=""/>
+      <div className={styles.desc}>{product.desc}</div>
+      <div className={styles.goodsFooter}>
+        <div className={styles.goodsPrice}>
+          <p>ЦЕНА:</p>
+          <span>{product.price} руб.</span>
+        </div>
+      </div>
+      <Link to='/'>
+        <button className={styles.buttonBack}>
+          Вернуться назад
+        </button>
+      </Link>
     </div>
   )
 }
