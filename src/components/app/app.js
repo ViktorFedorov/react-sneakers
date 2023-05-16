@@ -13,6 +13,8 @@ import ProductDetails from '../product-details/product-details'
 export const FavoritesContext = React.createContext(null)
 
 function App() {
+  const [successOrder, setSuccess] = useState(false)
+
   // флаг загрузки товаров с бэка
   const [isLoading, setLoading] = useState(false)
 
@@ -120,6 +122,8 @@ function App() {
       .catch(console.log)
   }
 
+  console.log(successOrder)
+
   // сумма товаров в корзине
   const getSum = () => goodsInCart.length ? goodsInCart.reduce((acc, item) => (acc + item.price), 0) : null
 
@@ -131,6 +135,7 @@ function App() {
         setVisible={setVisible}/>
       <Cart
         sum={getSum()}
+        setSuccess={setSuccess}
         goodsInCart={goodsInCart}
         remove={removeGoodFromCart}
         visible={visible}

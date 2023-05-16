@@ -4,7 +4,7 @@ import CartItem from '../cart-item/cart-item'
 import CartFooter from '../cart-footer/cart-footer'
 import EmptyCart from '../empty-cart/empty-cart'
 
-const Cart = ({sum, remove, goodsInCart, visible, setVisible}) => {
+const Cart = ({sum, setSuccess, success, remove, goodsInCart, visible, setVisible}) => {
   useEffect(() => {
     const handlerPressButton = (e) => {
       if (e.key === 'Escape') setVisible(false)
@@ -40,11 +40,11 @@ const Cart = ({sum, remove, goodsInCart, visible, setVisible}) => {
               ? goodsInCart.map(({id, title, price, image}) => {
                   return <CartItem key={id} id={id} title={title} price={price} image={image} remove={remove} />
                 })
-              : <EmptyCart setVisible={setVisible} />
+              : <EmptyCart success={success} setVisible={setVisible} />
             }
           </div>
           {
-            sum && <CartFooter sum={sum} tax={getTax()}/>
+            sum && <CartFooter setSuccess={setSuccess} sum={sum} tax={getTax()}/>
           }
         </div>
       </div>

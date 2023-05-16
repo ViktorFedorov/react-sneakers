@@ -14,7 +14,8 @@ const CartFooter = ({sum, tax}) => {
         <span className={styles.dashed}></span>
         <span className={styles.boldText}>{Math.floor(tax)} руб.</span>
       </div>
-      <button className={styles.createOrderButton}>
+      <button
+        className={styles.createOrderButton}>
         Оформить заказ
       </button>
     </div>
