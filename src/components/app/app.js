@@ -131,7 +131,6 @@ function App() {
         setVisible={setVisible}/>
       <Cart
         sum={getSum()}
-        setSuccess={setSuccess}
         goodsInCart={goodsInCart}
         remove={removeGoodFromCart}
         visible={visible}
